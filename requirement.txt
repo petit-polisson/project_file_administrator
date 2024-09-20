@@ -1,2 +1,2 @@
-matplotlib
-numpy
+fastapi[standard]
+>>>>>>> 2d361c2 (requirement)
