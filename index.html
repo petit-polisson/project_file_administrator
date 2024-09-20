@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de fichiers</title>
+    <script>
+        // Fonction pour ouvrir un fichier
+        async function openFile() {
+            const fileName = document.getElementById("file-name").value;
+            const response = await fetch("http://127.0.0.1:8000/open-file", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ file_name: fileName })
+            });
+            const result = await response.json();
+            alert(result.message);
+        }
+
+        // Fonction pour renommer un fichier
+        async function renameFile() {
+            const sourceFile = document.getElementById("source-file").value;
+            const newName = document.getElementById("new-name").value;
+            const response = await fetch("http://127.0.0.1:8000/rename-file", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ source_file: sourceFile, new_name: newName })
+            });
+            const result = await response.json();
+            alert(result.message);
+        }
+
+        // Ajouter d'autres fonctions similaires pour les autres opérations...
+    </script>
+</head>
+<body>
+    <h1>Gestionnaire de fichiers</h1>
+
+    <!-- Ouvrir un fichier -->
+    <h3>Ouvrir un fichier</h3>
+    <input type="text" id="file-name" placeholder="Nom du fichier à ouvrir">
+    <button onclick="openFile()">Ouvrir</button>
+
+    <!-- Renommer un fichier -->
+    <h3>Renommer un fichier</h3>
+    <input type="text" id="source-file" placeholder="Chemin du fichier source">
+    <input type="text" id="new-name" placeholder="Nouveau nom">
+    <button onclick="renameFile()">Renommer</button>
+
+    <!-- Ajouter des sections similaires pour les autres actions... -->
+
+</body>
+</html>
