@@ -1,6 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-import shutil
+from pydantic import BaseModel
 import os
 
 app = FastAPI()
@@ -25,6 +25,23 @@ def get_index():
 @app.get("/")
 def read_root():
     return {"message": "Bienvenue sur l'API de gestion des fichiers!"}
+
+class ListFiles(BaseModel):
+    path: str
+
+# Show file
+@app.post("/list-directory")
+async def show_file(req: ListFiles):
+    expanded = os.path.expanduser(req.path)
+    path = os.path.abspath(expanded)
+    output = os.listdir(path)
+    files = []
+    for entry in output:
+        files.append({
+            'filename': entry,
+            'stat': os.stat(f'{path}/{entry}')
+        })
+    return files
 
 # Ouvrir un fichier
 @app.post("/open-file")
