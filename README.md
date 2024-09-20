@@ -2,7 +2,7 @@ Gestionaire
 Must have
   - Un gestionaire de tache (affichage)/2
   - acceder/ouvrir les fichiers/dossier/2
-  - ajouter des fichiers/dossier/2
+  - ajouter des dossier/2
   - supprimer les fichiers/dossier/2
   - API/2
 
